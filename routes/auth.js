@@ -2,10 +2,12 @@
 
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const authorizedUser = {
   username: 'demo',
-  password: 'password1'
+  password: 'password1',
+  token: null
 };
 
 router.post('/', (req, res) => {
@@ -25,13 +27,13 @@ router.post('/', (req, res) => {
   }
 
   if (username === authorizedUser.username && password === authorizedUser.password) {
-    res.status(200).json({ message: 'Login successful' });
+
+    authorizedUser.token = jwt.sign(authorizedUser, process.env.JWT_SECRET);
+
+    res.status(200).json(authorizedUser);
   }
-
-  //TODO: provide authentication token
-
+  
 });
-
 
 
 router.delete('/', (req, res, next) => {

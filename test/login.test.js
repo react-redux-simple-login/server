@@ -1,5 +1,6 @@
 'use strict';
 
+const expect = require('chai').expect;
 const request = require('supertest');
 const server = require('../server.js');
 
@@ -38,7 +39,7 @@ describe('POST /auth', () => {
       .expect(401, {err: 'password incorrect'}, done);
   });
 
-  it('responds with 200 and success message if username/password match', (done) => {
+  it('responds with 200 if username/password match', (done) => {
     request(server)
       .post('/auth')
       .set('Accept', 'application/json')
@@ -47,7 +48,23 @@ describe('POST /auth', () => {
         password: 'password1'
       })
       .expect('Content-Type', /json/)
-      .expect(200, {message: 'Login successful'}, done);
+      .expect(200, done);
+  });
+
+  it('assigns user jwt token', (done) => {
+    request(server)
+      .post('/auth')
+      .set('Accept', 'application/json')
+      .send({
+        username: 'demo',
+        password: 'password1'
+      })
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body).to.have.property('token');
+        expect(res.body.token).to.not.be.null;
+        done();
+      });
   });
 
 });
