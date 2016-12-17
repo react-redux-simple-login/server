@@ -32,12 +32,11 @@ router.post('/', (req, res) => {
 
     res.status(200).json(authorizedUser);
   }
-  
+
 });
 
 
 router.delete('/', (req, res, next) => {
-  res.send('logout route accessible');
 
 });
 
