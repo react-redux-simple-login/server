@@ -38,7 +38,7 @@ describe('POST /auth', () => {
       .expect(401, {err: 'password incorrect'}, done);
   });
 
-  xit('responds with 200 and success message if username/password match', (done) => {
+  it('responds with 200 and success message if username/password match', (done) => {
     request(server)
       .post('/auth')
       .set('Accept', 'application/json')

@@ -24,6 +24,12 @@ router.post('/', (req, res) => {
     return res.status(401).json({ err: 'password incorrect'});
   }
 
+  if (username === authorizedUser.username && password === authorizedUser.password) {
+    res.status(200).json({ message: 'Login successful' });
+  }
+
+  //TODO: provide authentication token
+
 });
 
 
