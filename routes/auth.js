@@ -43,10 +43,11 @@ router.delete('/', (req, res, next) => {
   const { username, password, token } = req.body;
 
   if (!req.body.token) {
-    res.status(400).json({ err: 'bad request' });
+    return res.status(400).json({ err: 'bad request' });
   }
 
-
+  authorizedUser.token = null;
+  res.status(200).json(authorizedUser);
 
 });
 
