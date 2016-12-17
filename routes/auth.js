@@ -3,9 +3,23 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', (req, res, next) => {
-  res.send('login route accessible');
+const authorizedUser = {
+  username: 'demo',
+  password: 'password1'
+};
+
+router.post('/', (req, res) => {
+
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ err: 'bad request' });
+  }
+
+
 });
+
+
 
 router.delete('/', (req, res, next) => {
   res.send('logout route accessible');
