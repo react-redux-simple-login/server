@@ -5,8 +5,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 
 const authorizedUser = {
-  username: 'demo',
-  password: 'password1',
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
   token: null
 };
 
@@ -30,19 +30,18 @@ router.post('/', (req, res) => {
 
     authorizedUser.token = jwt.sign(authorizedUser, process.env.JWT_SECRET);
 
+    delete authorizedUser.password;
     res.status(200).json(authorizedUser);
   }
 
 });
 
 
-router.delete('/', (req, res, next) => {
+router.delete('/', (req, res) => {
 
-  console.log(req.body);
+  const { token } = req.body;
 
-  const { username, password, token } = req.body;
-
-  if (!req.body.token) {
+  if (!token) {
     return res.status(400).json({ err: 'bad request' });
   }
 
