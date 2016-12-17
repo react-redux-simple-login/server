@@ -30,8 +30,13 @@ router.post('/', (req, res) => {
 
     authorizedUser.token = jwt.sign(authorizedUser, process.env.JWT_SECRET);
 
-    delete authorizedUser.password;
-    res.status(200).json(authorizedUser);
+    res.status(200).json({
+      username: authorizedUser.username,
+      token: authorizedUser.token,
+      node_version: process.version,
+      app_path: process.cwd(),
+      timestamp: Date.now()
+    });
   }
 
 });
