@@ -23,10 +23,10 @@ describe('POST /auth', () => {
         password: 'password1'
       })
       .expect('Content-Type', /json/)
-      .expect(404, {err: 'user not found'}, done);
+      .expect(401, {err: 'user not found'}, done);
   });
 
-  xit('throws an error if username and password do not match', (done) => {
+  it('throws an error if username and password do not match', (done) => {
     request(server)
       .post('/auth')
       .set('Accept', 'application/json')
@@ -35,7 +35,7 @@ describe('POST /auth', () => {
         password: 'password513'
       })
       .expect('Content-Type', /json/)
-      .expect(404, {err: 'username and password do not match'}, done);
+      .expect(401, {err: 'password incorrect'}, done);
   });
 
   xit('responds with 200 and success message if username/password match', (done) => {

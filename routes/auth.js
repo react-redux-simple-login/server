@@ -17,7 +17,11 @@ router.post('/', (req, res) => {
   }
 
   if (username !== authorizedUser.username) {
-    return res.status(404).json({ err: 'user not found'});
+    return res.status(401).json({ err: 'user not found'});
+  }
+
+  if (password !== authorizedUser.password) {
+    return res.status(401).json({ err: 'password incorrect'});
   }
 
 });
