@@ -16,6 +16,9 @@ router.post('/', (req, res) => {
     return res.status(400).json({ err: 'bad request' });
   }
 
+  if (username !== authorizedUser.username) {
+    return res.status(404).json({ err: 'user not found'});
+  }
 
 });
 

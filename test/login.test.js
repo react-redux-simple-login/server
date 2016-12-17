@@ -14,7 +14,7 @@ describe('POST /auth', () => {
       .expect(400, {err: 'bad request'}, done);
   });
 
-  xit('throws an error if username does not exist', (done) => {
+  it('throws an error if username does not exist', (done) => {
     request(server)
       .post('/auth')
       .set('Accept', 'application/json')
