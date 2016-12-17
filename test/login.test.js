@@ -61,7 +61,6 @@ describe('POST /auth', () => {
       })
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        expect(res.body).to.have.property('token');
         expect(res.body.token).to.not.be.null;
         done();
       });
