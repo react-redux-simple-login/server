@@ -66,4 +66,24 @@ describe('POST /auth', () => {
       });
   });
 
+  it('returns node.js version, app path, date & time and user', (done) => {
+    request(server)
+      .post('/auth')
+      .set('Accept', 'application/json')
+      .send({
+        username: 'demo',
+        password: 'password1'
+      })
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body.username).to.not.be.null;
+        expect(res.body.username).to.equal('demo');
+        expect(res.body.node_version).to.not.be.null;
+        expect(res.body.node_version).to.equal(process.version);
+        expect(res.body.app_path).to.equal(process.cwd())
+        expect(res.body.timestamp).to.not.be.null;
+        done();
+      });
+  });
+
 });
