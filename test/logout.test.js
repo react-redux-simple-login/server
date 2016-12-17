@@ -6,7 +6,15 @@ const server = require('../server.js');
 
 describe('DELETE /auth', () => {
 
-  it('should respond with 200', (done) => {
+  it('should return an error message if logout is attempted with no jwt token', (done) => {
+    request(server)
+      .del('/auth')
+      .set('Accept', 'application/json')
+      .expect(400, { err: 'bad request' }, done);
+  });
+
+
+  it('should respond with 200 if logout is successful', (done) => {
     request(server)
       .del('/auth')
       .set('Accept', 'application/json')
@@ -21,6 +29,7 @@ describe('DELETE /auth', () => {
         expect(res.body).to.have.property('token');
         expect(res.body.token).to.be.null;
         expect(res.body.token).to.be.a('null');
+        done();
       });
   });
 

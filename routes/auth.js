@@ -38,6 +38,16 @@ router.post('/', (req, res) => {
 
 router.delete('/', (req, res, next) => {
 
+  console.log(req.body);
+
+  const { username, password, token } = req.body;
+
+  if (!req.body.token) {
+    res.status(400).json({ err: 'bad request' });
+  }
+
+
+
 });
 
 module.exports = router;
