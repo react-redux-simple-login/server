@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
       token: authorizedUser.token,
       node_version: process.version,
       app_path: process.cwd(),
-      timestamp: Date.now()
+      timestamp: new Date(Date.now())
     });
   }
 
