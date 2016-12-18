@@ -41,7 +41,6 @@ router.post('/', (req, res) => {
 
 });
 
-
 router.delete('/', (req, res) => {
 
   const { token } = req.body;
