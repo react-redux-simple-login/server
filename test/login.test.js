@@ -12,7 +12,7 @@ describe('POST /auth', () => {
       .set('Accept', 'application/json')
       .send({})
       .expect('Content-Type', /json/)
-      .expect(400, {err: 'bad request'}, done);
+      .expect(400, {err: 'please complete all fields'}, done);
   });
 
   it('throws an error if username does not exist', (done) => {

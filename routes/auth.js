@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ err: 'bad request' });
+    return res.status(400).json({ err: 'please complete all fields' });
   }
 
   if (username !== authorizedUser.username) {
